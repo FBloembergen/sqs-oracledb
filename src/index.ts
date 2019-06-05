@@ -23,11 +23,14 @@ const main = async () => {
             await Promise.all(sqsData.Messages.map(async message => {
                 console.log(`${new Date().toISOString()} INFO: Got a message! ${message.Body}`);
                 try {
+                    const start = new Date();
                     // Process message towards oracleDB
                     await sendToOracleDB(pool, message);
                     // Delete message from SQS, succesfully processed
                     console.log(`${new Date().toISOString()} INFO: Succesfully processed ${message.MessageId}, deleting from queue...`);
                     await removeFromQueue(message.ReceiptHandle);
+                    const end = new Date();
+                    console.log(`${new Date().toISOString()} INFO: All done, took ${(end.valueOf() - start.valueOf()) / 1000} sec.)`);
                 } catch (e) {
                     console.log(`${new Date().toISOString()} ERROR: ${e.stack || e}`);
                     return;
