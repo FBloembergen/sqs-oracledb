@@ -24,8 +24,8 @@ const main = async () => {
                 console.log(`${new Date().toISOString()} INFO: Got a message! ${message.Body}`);
                 try {
                     const start = new Date();
-                    // Process message towards oracleDB
-                    await sendToOracleDB(pool, message);
+                    // Process message towards oracleDB, in this example only the body
+                    await sendToOracleDB(pool, message.Body);
                     // Delete message from SQS, succesfully processed
                     console.log(`${new Date().toISOString()} INFO: Succesfully processed ${message.MessageId}, deleting from queue...`);
                     await removeFromQueue(message.ReceiptHandle);
