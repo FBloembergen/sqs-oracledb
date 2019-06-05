@@ -6,7 +6,7 @@ export async function sendToOracleDB(readyConnectionPool: OracleDB.Pool, message
     try {
         await (readyConnection.execute(
             `begin
-                :event := OFBL.processSQSMessage(:message);
+                :processdata := OFBL.processSQSMessage(:message);
             end;`,
             {
                 message: { dir: OracleDB.BIND_IN, type: OracleDB.STRING, val: JSON.stringify(message) },
