@@ -24,7 +24,8 @@
   "homepage": "https://github.com/FBloembergen/sqs-oracledb#readme",
   "dependencies": {
     "aws-sdk": "^2.468.0",
-    "oracledb": "^3.1.2"
+    "oracledb": "^3.1.2",
+    "tslib": "^1.9.3"
   },
   "devDependencies": {
     "@types/oracledb": "^3.1.1",
