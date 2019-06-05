@@ -5,7 +5,6 @@ import { readpoolConfigFromEnv, sendToOracleDB } from './oracle';
 import { getEnv } from './util';
 
 const sqsClient = new SQS({ region: 'eu-west-1' });
-// const sqsUrl = 'https://sqs.eu-west-1.amazonaws.com/107981364501/Ferry-AWSGilde.fifo'
 const sqsUrl = getEnv('SQSURL');
 const removeFromQueue = async (messageReceiptHandle: string | undefined) => {
     messageReceiptHandle && await sqsClient.deleteMessage({ QueueUrl: sqsUrl, ReceiptHandle: messageReceiptHandle }).promise();
